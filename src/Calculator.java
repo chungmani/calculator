@@ -16,8 +16,40 @@ public class Calculator {
         System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
         String cal = sc.nextLine();
         System.out.print("두번째 숫자를 입력하세요: ");
-        num2 =- sc.nextInt();
+        num2 = sc.nextInt();
         sc.nextLine();
+
+        // 계산하기
+        switch (cal) {
+            case "+":
+                int plus = num1 + num2;
+                System.out.println("결과: " + plus);
+                break;
+
+            case "-":
+                int minus = num1 - num2;
+                System.out.println("결과: " + minus);
+                break;
+
+            case "*":
+                int multiply = num1 * num2;
+                System.out.println("결과: " + multiply);
+                break;
+
+            case "/":
+                if (num2 != 0) {
+                    int devide = num1 / num2;
+                    System.out.println("결과: " + devide);
+                    break;
+                } else {
+                    System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
+                    break;
+                }
+
+            default:
+                System.out.println("정확한 사칙연산 기호를 입력하세요 (+, - , * , /)");
+        }
+
     }
 
 
