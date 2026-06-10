@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -22,11 +23,13 @@ public class App {
             // 계산하기
             calculator.calculate(num1, cal, num2);
 
-            System.out.println("계산했던 값들: " + calculator.results);
+            ArrayList<Integer> showResults = calculator.getResults();
+            System.out.println("계산했던 값들: " + showResults);
+
             System.out.print("계속하시겠습니까? (exit 입력시 종료): ");
             String exit = sc.nextLine();
             if (exit.equals("exit")) {
-                break;
+                break; // 반복문 빠져나오기
             }
         }
 

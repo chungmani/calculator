@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 public class Calculator {
-    ArrayList<Integer> results = new ArrayList<>();
+    // 외부에서 접근 막기
+    private ArrayList<Integer> results = new ArrayList<>();
 
     public int calculate(int num1, String cal, int num2) {
         int result = 0;
@@ -40,5 +41,15 @@ public class Calculator {
                 System.out.println("올바른 사칙연산을 기입하세요.");
         }
         return result;
+    }
+
+    // 게터로만 접근
+    public ArrayList<Integer> getResults() {
+        return results;
+    }
+
+    // 세터로만 수정
+    public void setResults(ArrayList<Integer> results) {
+        this.results = results;
     }
 }
