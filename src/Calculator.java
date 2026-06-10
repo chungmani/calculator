@@ -43,6 +43,11 @@ public class Calculator {
         return result;
     }
 
+    // 오래된 연산결과부터 삭제하는 기능
+    public void removeResult() {
+        results.remove(0);
+    }
+
     // 게터로만 접근
     public ArrayList<Integer> getResults() {
         return results;

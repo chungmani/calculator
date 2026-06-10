@@ -23,13 +23,17 @@ public class App {
             // 계산하기
             calculator.calculate(num1, cal, num2);
 
-            ArrayList<Integer> showResults = calculator.getResults();
-            System.out.println("계산했던 값들: " + showResults);
-
-            System.out.print("계속하시겠습니까? (exit 입력시 종료): ");
-            String exit = sc.nextLine();
-            if (exit.equals("exit")) {
+            System.out.print("[exit: 종료] [history: 연산결과들 보기] [remove: 첫 연산결과 제거] 계속하려면 아무키나 누르세요 : ");
+            String input = sc.nextLine();
+            if (input.equals("exit")) {
                 break; // 반복문 빠져나오기
+            } else if (input.equals("history")) {
+                ArrayList<Integer> showResults = calculator.getResults();
+                System.out.println("HISTORY: " + showResults);
+            } else if (input.equals("remove")) {
+                calculator.removeResult();
+                ArrayList<Integer> showResults = calculator.getResults();
+                System.out.println("HISTORY: " + showResults);
             }
         }
 
