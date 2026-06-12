@@ -1,63 +1,60 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Calculator {
+    // 외부에서 접근 막기
+    private ArrayList<Integer> results = new ArrayList<>();
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public int calculate(int num1, String cal, int num2) {
+        int result = 0;
 
-        String exit = "no"; // 반복문을 위해 변수 선언
-        // 계산 후 exit 입력되면 반복 종료
-        while (!exit.equals("exit")) {
+        switch (cal) {
+            case "+":
+                int add = num1 + num2;
+                System.out.println("결과: " + add);
+                results.add(add);
+                return result = add;
 
-            // 숫자 초기화
-            int num1 = 0;
-            int num2 = 0;
+            case "-":
+                int sub = num1 - num2;
+                System.out.println("결과: " + sub);
+                results.add(sub);
+                return result = sub;
 
-            // 숫자, 사칙연산 기호 입력받기
-            System.out.print("첫번째 숫자를 입력하세요: ");
-            num1 = sc.nextInt();
-            sc.nextLine();
-            System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
-            String cal = sc.nextLine();
-            System.out.print("두번째 숫자를 입력하세요: ");
-            num2 = sc.nextInt();
-            sc.nextLine();
+            case "*":
+                int multiply = num1 * num2;
+                System.out.println("결과: " + multiply);
+                results.add(multiply);
+                return result = multiply;
 
-            // 계산하기
-            switch (cal) {
-                case "+":
-                    int plus = num1 + num2;
-                    System.out.println("결과: " + plus);
+            case "/":
+                if (num2 != 0) {
+                    int divide = num1 / num2;
+                    System.out.println("결과: " + divide);
+                    results.add(divide);
+                    return result = divide;
+                } else {
+                    System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
                     break;
+                }
 
-                case "-":
-                    int minus = num1 - num2;
-                    System.out.println("결과: " + minus);
-                    break;
-
-                case "*":
-                    int multiply = num1 * num2;
-                    System.out.println("결과: " + multiply);
-                    break;
-
-                case "/":
-                    if (num2 != 0) {
-                        int devide = num1 / num2;
-                        System.out.println("결과: " + devide);
-                        break;
-                    } else {
-                        System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
-                        break;
-                    }
-
-                default:
-                    System.out.println("정확한 사칙연산 기호를 입력하세요 (+, - , * , /)");
-            }
-            System.out.print("계속하시겠습니까? (exit 입력시 종료): ");
-            exit = sc.nextLine();
+            default:
+                System.out.println("올바른 사칙연산을 기입하세요.");
         }
-
+        return result;
     }
 
+    // 오래된 연산결과부터 삭제하는 기능
+    public void removeResult() {
+        results.remove(0);
+    }
 
+    // 게터로만 접근
+    public ArrayList<Integer> getResults() {
+        return results;
+    }
+
+    // 세터로만 수정
+    public void setResults(ArrayList<Integer> results) {
+        this.results = results;
+    }
 }
