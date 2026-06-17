@@ -10,15 +10,31 @@ public class App {
         // 계산 후 exit 입력되면 반복 종료
         while (true) {
 
+            // 예외처리로 인해 밖에서 변수 선언
+            int num1 = 0;
+            int num2 = 0;
+            String cal = "";
+
             // 숫자, 사칙연산 기호 입력받기
-            System.out.print("첫번째 숫자를 입력하세요: ");
-            int num1 = sc.nextInt();
-            sc.nextLine();
-            System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
-            String cal = sc.nextLine();
-            System.out.print("두번째 숫자를 입력하세요: ");
-            int num2 = sc.nextInt();
-            sc.nextLine();
+            try {
+                System.out.print("첫번째 숫자를 입력하세요: ");
+                num1 = sc.nextInt();
+                sc.nextLine();
+                if (num1 < 0) {
+                    throw new ArithmeticException("0이상의 정수만 입력 가능합니다.");
+                }
+                System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
+                cal = sc.nextLine();
+                System.out.print("두번째 숫자를 입력하세요: ");
+                num2 = sc.nextInt();
+                sc.nextLine();
+                if (num2 < 0) {
+                    throw new ArithmeticException("0이상의 정수만 입력 가능합니다.");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
 
             // 계산하기
             calculator.calculate(num1, cal, num2);
@@ -36,8 +52,5 @@ public class App {
                 System.out.println("HISTORY: " + showResults);
             }
         }
-
     }
-
-
 }
