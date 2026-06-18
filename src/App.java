@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -27,7 +27,6 @@ public class App {
                 continue;
             }
 
-
             // 계산하기
             calculator.calculate(num1, cal, num2);
 
@@ -36,14 +35,15 @@ public class App {
             if (input.equals("exit")) {
                 break; // 반복문 빠져나오기
             } else if (input.equals("history")) {
-                ArrayList<Integer> showResults = calculator.getResults();
+                List<Double> showResults = calculator.getResults();
                 System.out.println("HISTORY: " + showResults);
             } else if (input.equals("remove")) {
                 calculator.removeResult();
-                ArrayList<Integer> showResults = calculator.getResults();
+                List<Double> showResults = calculator.getResults();
                 System.out.println("HISTORY: " + showResults);
             }
         }
+        sc.close();
     }
 
     // 중복되는 코드 메서드로 만들기

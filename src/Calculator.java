@@ -1,45 +1,42 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
     // 외부에서 접근 막기
-    private ArrayList<Integer> results = new ArrayList<>();
+    private List<Double> results = new ArrayList<>();
+    OperatorType op;
 
-    public int calculate(int num1, String cal, int num2) {
-        int result = 0;
+    public double calculate(int num1, String cal, int num2) {
+        double result = 0;
 
         switch (cal) {
             case "+":
-                int add = num1 + num2;
-                System.out.println("결과: " + add);
-                results.add(add);
-                return result = add;
+                result = num1 + num2;
+                break;
 
             case "-":
-                int sub = num1 - num2;
-                System.out.println("결과: " + sub);
-                results.add(sub);
-                return result = sub;
+                result = num1 - num2;
+                break;
 
             case "*":
-                int multiply = num1 * num2;
-                System.out.println("결과: " + multiply);
-                results.add(multiply);
-                return result = multiply;
+                result = num1 * num2;
+                break;
 
             case "/":
                 if (num2 != 0) {
-                    int divide = num1 / num2;
-                    System.out.println("결과: " + divide);
-                    results.add(divide);
-                    return result = divide;
+                    result = (double) num1 / num2;
+                    break;
                 } else {
                     System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
-                    break;
+                    return 0;
                 }
 
             default:
                 System.out.println("올바른 사칙연산을 기입하세요.");
+                return 0;
         }
+        System.out.println("결과: " + result);
+        results.add(result);
         return result;
     }
 
@@ -49,7 +46,7 @@ public class Calculator {
     }
 
     // 게터로만 접근
-    public ArrayList<Integer> getResults() {
+    public List<Double> getResults() {
         return results;
     }
 }
