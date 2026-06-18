@@ -13,26 +13,18 @@ public class App {
             // 예외처리로 인해 밖에서 변수 선언
             int num1 = 0;
             int num2 = 0;
+
             String cal = "";
 
             // 숫자, 사칙연산 기호 입력받기
             try {
-                System.out.print("첫번째 숫자를 입력하세요: ");
-                num1 = sc.nextInt();
-                sc.nextLine();
-                if (num1 < 0) {
-                    throw new ArithmeticException("0이상의 정수만 입력 가능합니다.");
-                }
+                num1 = input(sc,"첫번째 숫자를 입력하세요: ");
                 System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
                 cal = sc.nextLine();
-                System.out.print("두번째 숫자를 입력하세요: ");
-                num2 = sc.nextInt();
-                sc.nextLine();
-                if (num2 < 0) {
-                    throw new ArithmeticException("0이상의 정수만 입력 가능합니다.");
-                }
+                num2 = input(sc,"두번째 숫자를 입력하세요: ");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                continue;
             }
 
 
@@ -52,5 +44,16 @@ public class App {
                 System.out.println("HISTORY: " + showResults);
             }
         }
+    }
+
+    // 중복되는 코드 메서드로 만들기
+    static int input(Scanner sc, String notice) {
+        System.out.print(notice);
+        int num = sc.nextInt();
+        sc.nextLine();
+        if (num < 0) {
+            throw new ArithmeticException("0 이상의 정수만 입력해주세요.");
+        }
+        return num;
     }
 }

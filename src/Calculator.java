@@ -52,9 +52,4 @@ public class Calculator {
     public ArrayList<Integer> getResults() {
         return results;
     }
-
-    // 세터로만 수정
-    public void setResults(ArrayList<Integer> results) {
-        this.results = results;
-    }
 }
