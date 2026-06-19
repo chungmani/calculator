@@ -9,20 +9,28 @@ public class Calculator {
     public double calculate(int num1, String cal, int num2) {
         double result = 0;
 
-        switch (cal) {
-            case "+":
+        // enum 값이랑 비교
+        for (OperatorType value : OperatorType.values()) {
+            if (value.getOperator().equals(cal)) {
+                op = value;
+                break;
+            }
+        }
+
+        switch (op) {
+            case ADD:
                 result = num1 + num2;
                 break;
 
-            case "-":
+            case SUBTRACT:
                 result = num1 - num2;
                 break;
 
-            case "*":
+            case MULTIPLY:
                 result = num1 * num2;
                 break;
 
-            case "/":
+            case DIVIDE:
                 if (num2 != 0) {
                     result = (double) num1 / num2;
                     break;

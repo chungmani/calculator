@@ -2,11 +2,15 @@ public enum OperatorType {
     ADD("+"),
     SUBTRACT("-"),
     MULTIPLY("*"),
-    DIVIDE("-");
+    DIVIDE("/");
 
     private String operator;
 
-    OperatorType(String s) {
-        this.operator = s;
+    OperatorType(String operator) {
+        this.operator = operator;
+    }
+
+    public String getOperator() {
+        return operator;
     }
 }
