@@ -1,60 +1,55 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
     // 외부에서 접근 막기
-    private ArrayList<Integer> results = new ArrayList<>();
+    private List<Double> results = new ArrayList<>();
 
-    public int calculate(int num1, String cal, int num2) {
-        int result = 0;
+    public double calculate(int num1, String cal, int num2) {
+        double result = 0;
+        OperatorType op = OperatorType.findValue(cal);
 
-        switch (cal) {
-            case "+":
-                int add = num1 + num2;
-                System.out.println("결과: " + add);
-                results.add(add);
-                return result = add;
+        if (op == null) {
+            System.out.println("올바른 사친연산을 기입하세요");
+            return 0;
+        }
 
-            case "-":
-                int sub = num1 - num2;
-                System.out.println("결과: " + sub);
-                results.add(sub);
-                return result = sub;
+        switch (op) {
+            case ADD:
+                result = num1 + num2;
+                break;
 
-            case "*":
-                int multiply = num1 * num2;
-                System.out.println("결과: " + multiply);
-                results.add(multiply);
-                return result = multiply;
+            case SUBTRACT:
+                result = num1 - num2;
+                break;
 
-            case "/":
+            case MULTIPLY:
+                result = num1 * num2;
+                break;
+
+            case DIVIDE:
                 if (num2 != 0) {
-                    int divide = num1 / num2;
-                    System.out.println("결과: " + divide);
-                    results.add(divide);
-                    return result = divide;
+                    result = (double) num1 / num2;
+                    break;
                 } else {
                     System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
-                    break;
+                    return 0;
                 }
-
-            default:
-                System.out.println("올바른 사칙연산을 기입하세요.");
         }
+        System.out.println("결과: " + result);
+        results.add(result);
         return result;
     }
 
     // 오래된 연산결과부터 삭제하는 기능
     public void removeResult() {
-        results.remove(0);
+        if (!results.isEmpty()) {
+            results.remove(0);
+        }
     }
 
     // 게터로만 접근
-    public ArrayList<Integer> getResults() {
+    public List<Double> getResults() {
         return results;
-    }
-
-    // 세터로만 수정
-    public void setResults(ArrayList<Integer> results) {
-        this.results = results;
     }
 }

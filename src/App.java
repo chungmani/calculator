@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -10,15 +10,22 @@ public class App {
         // 계산 후 exit 입력되면 반복 종료
         while (true) {
 
+            // 예외처리로 인해 밖에서 변수 선언
+            int num1 = 0;
+            int num2 = 0;
+
+            String cal = "";
+
             // 숫자, 사칙연산 기호 입력받기
-            System.out.print("첫번째 숫자를 입력하세요: ");
-            int num1 = sc.nextInt();
-            sc.nextLine();
-            System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
-            String cal = sc.nextLine();
-            System.out.print("두번째 숫자를 입력하세요: ");
-            int num2 = sc.nextInt();
-            sc.nextLine();
+            try {
+                num1 = input(sc,"첫번째 숫자를 입력하세요: ");
+                System.out.print("사칙연산 기호를 입력하세요(+, -, *, /): ");
+                cal = sc.nextLine();
+                num2 = input(sc,"두번째 숫자를 입력하세요: ");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
 
             // 계산하기
             calculator.calculate(num1, cal, num2);
@@ -28,16 +35,25 @@ public class App {
             if (input.equals("exit")) {
                 break; // 반복문 빠져나오기
             } else if (input.equals("history")) {
-                ArrayList<Integer> showResults = calculator.getResults();
+                List<Double> showResults = calculator.getResults();
                 System.out.println("HISTORY: " + showResults);
             } else if (input.equals("remove")) {
                 calculator.removeResult();
-                ArrayList<Integer> showResults = calculator.getResults();
+                List<Double> showResults = calculator.getResults();
                 System.out.println("HISTORY: " + showResults);
             }
         }
-
+        sc.close();
     }
 
-
+    // 중복되는 코드 메서드로 만들기
+    static int input(Scanner sc, String notice) {
+        System.out.print(notice);
+        int num = sc.nextInt();
+        sc.nextLine();
+        if (num < 0) {
+            throw new ArithmeticException("0 이상의 정수만 입력해주세요.");
+        }
+        return num;
+    }
 }
