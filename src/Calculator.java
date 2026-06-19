@@ -4,17 +4,14 @@ import java.util.List;
 public class Calculator {
     // 외부에서 접근 막기
     private List<Double> results = new ArrayList<>();
-    OperatorType op;
 
     public double calculate(int num1, String cal, int num2) {
         double result = 0;
+        OperatorType op = OperatorType.findValue(cal);
 
-        // enum 값이랑 비교
-        for (OperatorType value : OperatorType.values()) {
-            if (value.getOperator().equals(cal)) {
-                op = value;
-                break;
-            }
+        if (op == null) {
+            System.out.println("올바른 사친연산을 기입하세요");
+            return 0;
         }
 
         switch (op) {
@@ -38,10 +35,6 @@ public class Calculator {
                     System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
                     return 0;
                 }
-
-            default:
-                System.out.println("올바른 사칙연산을 기입하세요.");
-                return 0;
         }
         System.out.println("결과: " + result);
         results.add(result);
@@ -50,7 +43,9 @@ public class Calculator {
 
     // 오래된 연산결과부터 삭제하는 기능
     public void removeResult() {
-        results.remove(0);
+        if (!results.isEmpty()) {
+            results.remove(0);
+        }
     }
 
     // 게터로만 접근
