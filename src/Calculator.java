@@ -1,35 +1,35 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calculator {
+public class Calculator<T extends Number> {
     // 외부에서 접근 막기
     private List<Double> results = new ArrayList<>();
 
-    public double calculate(int num1, String cal, int num2) {
+    public double calculate(T num1, String cal, T num2) {
         double result = 0;
         OperatorType op = OperatorType.findValue(cal);
 
         if (op == null) {
-            System.out.println("올바른 사친연산을 기입하세요");
+            System.out.println("올바른 사칙연산을 기입하세요");
             return 0;
         }
 
         switch (op) {
             case ADD:
-                result = num1 + num2;
+                result = num1.doubleValue() + num2.doubleValue();
                 break;
 
             case SUBTRACT:
-                result = num1 - num2;
+                result = num1.doubleValue() - num2.doubleValue();
                 break;
 
             case MULTIPLY:
-                result = num1 * num2;
+                result = num1.doubleValue() * num2.doubleValue();
                 break;
 
             case DIVIDE:
-                if (num2 != 0) {
-                    result = (double) num1 / num2;
+                if (num2.doubleValue() != 0) {
+                    result = num1.doubleValue() / num2.doubleValue();
                     break;
                 } else {
                     System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");

@@ -5,14 +5,14 @@ public class App {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Calculator calculator = new Calculator();
+        Calculator<Double> calculator = new Calculator<>();
 
         // 계산 후 exit 입력되면 반복 종료
         while (true) {
 
             // 예외처리로 인해 밖에서 변수 선언
-            int num1 = 0;
-            int num2 = 0;
+            double num1 = 0;
+            double num2 = 0;
 
             String cal = "";
 
@@ -24,6 +24,7 @@ public class App {
                 num2 = input(sc,"두번째 숫자를 입력하세요: ");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                sc.nextLine(); // 잘못된 입력값 비워주기
                 continue;
             }
 
@@ -47,9 +48,9 @@ public class App {
     }
 
     // 중복되는 코드 메서드로 만들기
-    static int input(Scanner sc, String notice) {
+    static double input(Scanner sc, String notice) {
         System.out.print(notice);
-        int num = sc.nextInt();
+        double num = sc.nextDouble();
         sc.nextLine();
         if (num < 0) {
             throw new ArithmeticException("0 이상의 정수만 입력해주세요.");
