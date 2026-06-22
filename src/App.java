@@ -31,7 +31,7 @@ public class App {
             // 계산하기
             calculator.calculate(num1, cal, num2);
 
-            System.out.print("[exit: 종료] [history: 연산결과들 보기] [remove: 첫 연산결과 제거] 계속하려면 아무키나 누르세요 : ");
+            System.out.print("[exit: 종료] [history: 연산결과들 보기] [standard: 기준값보다 높은 결과들 보기] [remove: 첫 연산결과 제거] 계속하려면 아무키나 누르세요 : ");
             String input = sc.nextLine();
             if (input.equals("exit")) {
                 break; // 반복문 빠져나오기
@@ -42,6 +42,8 @@ public class App {
                 calculator.removeResult();
                 List<Double> showResults = calculator.getResults();
                 System.out.println("HISTORY: " + showResults);
+            } else if (input.equals("standard")) {
+                calculator.filterResult(sc);
             }
         }
         sc.close();

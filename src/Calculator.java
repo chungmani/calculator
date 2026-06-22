@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Calculator<T extends Number> {
     // 외부에서 접근 막기
@@ -47,6 +48,17 @@ public class Calculator<T extends Number> {
             results.remove(0);
         }
     }
+
+    // 저장된 결과값 중에 스캐너로 입력된 값보다 큰 결과값만 출력하는 기능
+    public void filterResult(Scanner sc) {
+        System.out.print("기준값 입력: ");
+        double standardNum = sc.nextDouble();
+        sc.nextLine();
+        results.stream()
+                .filter(resultsValue -> resultsValue > standardNum)
+                .forEach(System.out::println);
+    }
+
 
     // 게터로만 접근
     public List<Double> getResults() {
