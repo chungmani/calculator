@@ -1,35 +1,36 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Calculator {
+public class Calculator<T extends Number> {
     // 외부에서 접근 막기
     private List<Double> results = new ArrayList<>();
 
-    public double calculate(int num1, String cal, int num2) {
+    public double calculate(T num1, String cal, T num2) {
         double result = 0;
         OperatorType op = OperatorType.findValue(cal);
 
         if (op == null) {
-            System.out.println("올바른 사친연산을 기입하세요");
+            System.out.println("올바른 사칙연산을 기입하세요");
             return 0;
         }
 
         switch (op) {
             case ADD:
-                result = num1 + num2;
+                result = num1.doubleValue() + num2.doubleValue();
                 break;
 
             case SUBTRACT:
-                result = num1 - num2;
+                result = num1.doubleValue() - num2.doubleValue();
                 break;
 
             case MULTIPLY:
-                result = num1 * num2;
+                result = num1.doubleValue() * num2.doubleValue();
                 break;
 
             case DIVIDE:
-                if (num2 != 0) {
-                    result = (double) num1 / num2;
+                if (num2.doubleValue() != 0) {
+                    result = num1.doubleValue() / num2.doubleValue();
                     break;
                 } else {
                     System.out.println("나눗셈에서는 분모가 0이 올 수 없습니다.");
@@ -47,6 +48,17 @@ public class Calculator {
             results.remove(0);
         }
     }
+
+    // 저장된 결과값 중에 스캐너로 입력된 값보다 큰 결과값만 출력하는 기능
+    public void filterResult(Scanner sc) {
+        System.out.print("기준값 입력: ");
+        double standardNum = sc.nextDouble();
+        sc.nextLine();
+        results.stream()
+                .filter(resultsValue -> resultsValue > standardNum)
+                .forEach(System.out::println);
+    }
+
 
     // 게터로만 접근
     public List<Double> getResults() {
